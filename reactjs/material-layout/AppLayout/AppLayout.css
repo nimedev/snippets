@@ -1,0 +1,51 @@
+/** AppLayout component */
+
+@import "../../styles/settings";
+@import "niduscss-lib-mixins";
+
+/* Root component selector
+   ========================================================================== */
+
+.AppLayout {
+  /* Box-model */
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Component inner classes
+   ========================================================================== */
+
+.AppLayout-content {
+  /* Box-model */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.AppLayout-main {
+  /* Box-model */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Layouts for route components
+   ========================================================================== */
+
+/**
+ * Default view. Use in route component to set default styles for views
+ */
+
+.RouteView--default {
+  /* Box-model */
+  width: 100%;
+  max-width: var(--App-pagemaxwidth);
+
+  /* Responsive */
+  @mixin respondTo --medium-viewport {
+    /* Box-model */
+    padding: var(--App-gutterwidth);
+  }
+}

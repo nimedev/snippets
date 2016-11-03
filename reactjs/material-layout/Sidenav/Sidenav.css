@@ -1,0 +1,137 @@
+/** Sidenav component */
+
+@import "../../styles/settings";
+@import "niduscss-lib-mixins";
+
+:root {
+  --Sidenav-z-index: calc(var(--App-zl-shoryuken) + 2);
+  --Sidenav-xs-width: calc(100vw - 3.5rem);
+  --Sidenav-md-width: 13.125rem;
+  --Sidenav-delay: 0.3s;
+  --Sidenav-expand-delay: 0.3s;
+  --Sidenav-color: #fff;
+  --Sidenav-headerHeight: 6rem;
+}
+
+/* Root component selector
+   ========================================================================== */
+
+.Sidenav {
+  /* Positioning */
+  position: fixed;
+  top: 0;
+  left: calc(-1 * var(--Sidenav-xs-width));
+  z-index: var(--Sidenav-z-index);
+
+  /* Box-model */
+  height: 100%;
+
+  /* Misc */
+  transition: left var(--Sidenav-delay);
+
+  /* Responsive show allways in large devices */
+  @mixin respondTo --medium-viewport {
+    /* Positioning */
+    position: static;
+  }
+
+  /* Styles when sidenav is visible */
+  &.is-visible {
+    /* Positioning */
+    left: 0;
+  }
+}
+
+/* Component inner classes
+   ========================================================================== */
+
+/* Sidenav backdrop */
+
+.Sidenav-back {
+  /* Positioning */
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  /* Box-model */
+  display: none;
+  height: 120%;
+
+  /* Visual */
+  background-color: var(--App-backdrop);
+
+  /* Show when is sidenav is visible and is small device */
+  .Sidenav.is-visible & {
+    @mixin respondTo --medium-viewport-max {
+      /* Box-model */
+      display: block;
+    }
+  }
+}
+
+/* Wrap header and content */
+
+.Sidenav-wrapper {
+  /* Positioning */
+  position: relative;
+
+  /* Box-model */
+  overflow-x: hidden;
+  width: var(--Sidenav-xs-width);
+  height: 100%;
+
+  /* Visual */
+  background-color: var(--Sidenav-color);
+
+  /* Misc */
+  transition: width var(--Sidenav-expand-delay);
+
+  /* Responsive */
+  @mixin respondTo --medium-viewport {
+    /* Box-model */
+    width: var(--Sidenav-md-width);
+
+    /* Import mixin from shadow utils */
+    @mixin u-shadowRight;
+  }
+
+  /* Show shadows only when is visible */
+  .Sidenav.is-visible & {
+    /* Import mixin from shadow utils */
+    @mixin u-shadowRight;
+  }
+}
+
+/* Sidenav header */
+
+.Sidenav-header {
+  /* Box-model */
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  height: var(--Sidenav-headerHeight);
+}
+
+/* Sidenav logo */
+
+.Sidenav-logo {
+  /* Remove outline when focus */
+  @mixin removeOutline;
+
+  /* Image logo */
+  & img {
+    /* Box-model */
+    max-width: 100%;
+    max-height: none;
+    height: auto;
+  }
+}
+
+/* Sidenav content */
+
+.Sidenav-content {
+  /* Box-model */
+  overflow-y: auto;
+  height: calc(100% - var(--Sidenav-headerHeight) - 0.0625rem);
+}

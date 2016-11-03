@@ -1,0 +1,147 @@
+/** Input component */
+
+@import "../../styles/settings";
+
+:root {
+  --Input-height: 2.25rem;
+  --Input-icon-size: 1.25rem;
+  --Input-icon-gap: 0.125rem;
+  --Input-cross-width: 0.25rem;
+  --Input-success-cl: #41d873;
+  --Input-warn-cl: var(--App-warn-df);
+}
+
+/* Root component selector
+   ========================================================================== */
+
+.Input {
+  /* Positioning */
+  position: relative;
+
+  /* Box-model */
+  margin-bottom: 1rem;
+
+  /* Typography */
+  text-align: left;
+
+  /* Styles for input element */
+  & > input {
+    /* Box-model */
+    padding-right: calc(var(--Input-icon-size) + 2 * var(--Input-icon-gap));
+    height: var(--Input-height);
+
+    /* Typography */
+    line-height: var(--Input-height);
+
+    /* When input is valid */
+    &:valid:not(.Input--customError) {
+      /* Check element */
+      & ~ .Input-valIcon {
+        /* Box-model */
+        display: block;
+
+        /* Visual */
+        background-color: var(--Input-success-cl);
+
+        /* Check mark */
+        &::after {
+          /* Positioning */
+          position: absolute;
+          left: calc(var(--Input-icon-size) / 2.5);
+          top: 40%;
+
+          /* Box-model */
+          content: " ";
+          display: block;
+          margin-top: -0.2em;
+          width: 0.3em;
+          height: 0.6em;
+
+          /* Visual */
+          border: solid white;
+          border-width: 0 0.2em 0.2em 0;
+
+          /* Misc */
+          transform: rotate(45deg);
+        }
+      }
+    }
+
+    /* When input is invalid and can show validation */
+    &.Input--validate:invalid,
+    &.Input--customError {
+      /* And is focused */
+      &:focus {
+        /* Visual */
+        border-color: var(--Input-warn-cl);
+      }
+
+      /* X element */
+      & ~ .Input-valIcon {
+        /* Box-model */
+        display: block;
+
+        /* Misc */
+        transform: rotate(45deg);
+
+        &::before {
+          /* V axe */
+          position: absolute;
+          left: calc((var(--Input-icon-size) - var(--Input-cross-width)) / 2);
+
+          /* Box-model */
+          content: "";
+          width: var(--Input-cross-width);
+          height: var(--Input-icon-size);
+
+          /* Visual */
+          background: var(--Input-warn-cl);
+        }
+
+        /* H axe */
+        &::after {
+          /* Positioning */
+          position: absolute;
+          top: calc((var(--Input-icon-size) - var(--Input-cross-width)) / 2);
+
+          /* Box-model */
+          content: "";
+          width: var(--Input-icon-size);
+          height: var(--Input-cross-width);
+
+          /* Visual */
+          background: var(--Input-warn-cl);
+        }
+      }
+    }
+  }
+}
+
+/* Component inner classes
+   ========================================================================== */
+
+.Input-valIcon {
+  /* Positioning */
+  position: absolute;
+  top: calc(1.25rem + (var(--Input-height) - var(--Input-icon-size)) / 2);
+  right: calc(2 * var(--Input-icon-gap));
+
+  /* Box-model */
+  display: none;
+  width: var(--Input-icon-size);
+  height: var(--Input-icon-size);
+
+  /* Visual */
+  border-radius: 100%;
+}
+
+.Input-description {
+  /* Typography */
+  color: var(--Input-warn-cl);
+  font-size: var(--App-fs-xsmall);
+
+  & > div {
+    /* Typography */
+    line-height: calc(var(--App-fs-xsmall) * 1.5);
+  }
+}
