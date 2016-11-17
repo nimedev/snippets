@@ -1,0 +1,27 @@
+/** Textarea component */
+
+@import "../../styles/settings";
+
+:root {
+  --Textarea-warn-cl: var(--App-warn-df);
+}
+
+.Textarea {
+  /* Box-model */
+  margin-bottom: 1rem;
+
+  /* Typography */
+  text-align: left;
+
+  /* Styles for textarea element */
+  & > textarea {
+    /* When textarea is invalid and can show validation */
+    &.Textarea--validate:invalid {
+      /* And is focused */
+      &:focus {
+        /* Visual */
+        border-color: var(--Textarea-warn-cl);
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+/** ErrorDescription component */
+
+@import "../../styles/settings";
+
+:root {
+  --ErrorDescription-warn-cl: var(--App-warn-df);
+}
+
+.ErrorDescription {
+  /* Typography */
+  color: var(--ErrorDescription-warn-cl);
+  font-size: var(--App-fs-xsmall);
+
+  & > div {
+    /* Typography */
+    line-height: calc(var(--App-fs-xsmall) * 1.5);
+  }
+}

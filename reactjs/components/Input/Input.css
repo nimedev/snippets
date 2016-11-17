@@ -7,12 +7,9 @@
   --Input-icon-size: 1.25rem;
   --Input-icon-gap: 0.125rem;
   --Input-cross-width: 0.25rem;
-  --Input-success-cl: #41d873;
+  --Input-successIcon-cl: #41d873;
   --Input-warn-cl: var(--App-warn-df);
 }
-
-/* Root component selector
-   ========================================================================== */
 
 .Input {
   /* Positioning */
@@ -25,7 +22,7 @@
   text-align: left;
 
   /* Styles for input element */
-  & > input {
+  & > .Input-input {
     /* Box-model */
     padding-right: calc(var(--Input-icon-size) + 2 * var(--Input-icon-gap));
     height: var(--Input-height);
@@ -34,14 +31,14 @@
     line-height: var(--Input-height);
 
     /* When input is valid */
-    &:valid:not(.Input--customError) {
+    &.Input--updated:valid {
       /* Check element */
       & ~ .Input-valIcon {
         /* Box-model */
         display: block;
 
         /* Visual */
-        background-color: var(--Input-success-cl);
+        background-color: var(--Input-successIcon-cl);
 
         /* Check mark */
         &::after {
@@ -68,8 +65,7 @@
     }
 
     /* When input is invalid and can show validation */
-    &.Input--validate:invalid,
-    &.Input--customError {
+    &.Input--validate:invalid {
       /* And is focused */
       &:focus {
         /* Visual */
@@ -117,9 +113,6 @@
   }
 }
 
-/* Component inner classes
-   ========================================================================== */
-
 .Input-valIcon {
   /* Positioning */
   position: absolute;
@@ -133,15 +126,4 @@
 
   /* Visual */
   border-radius: 100%;
-}
-
-.Input-description {
-  /* Typography */
-  color: var(--Input-warn-cl);
-  font-size: var(--App-fs-xsmall);
-
-  & > div {
-    /* Typography */
-    line-height: calc(var(--App-fs-xsmall) * 1.5);
-  }
 }

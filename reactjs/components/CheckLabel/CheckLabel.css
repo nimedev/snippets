@@ -1,0 +1,50 @@
+/** CheckLabel component */
+
+/* Root component selector
+   ========================================================================== */
+
+.CheckLabel {
+  /* Box-model */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Checkbox */
+  & > input[type="checkbox"] {
+    /* Box-model */
+    display: none;
+
+    /* Sibling label (Use icon class to get icon fonts) */
+    & + label {
+      /* Box-model */
+      margin: 0 0.1875rem 0 0;
+
+      /* Isert icon content selector */
+      &::before {
+        /* Box-model */
+        content: "check_box_outline_blank";
+      }
+    }
+
+    /* When checkbox is checked */
+    &:checked + label::before {
+      /* Box-model */
+      content: "check_box";
+    }
+
+    /* Style for all labels */
+    & ~ label {
+      /* Box-model */
+      margin-bottom: 0;
+
+      /* Typography */
+      vertical-align: middle;
+    }
+  }
+
+  /* Labels */
+  > label {
+    /* Typography */
+    color: inherit;
+  }
+}
