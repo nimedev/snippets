@@ -15,17 +15,15 @@ import './Input.css'
 
 class Input extends Component {
 
-  static get propTypes() {
-    return {
-      customError: PropTypes.any,
-      description: PropTypes.object,
-      id: PropTypes.string.isRequired,
-      label: PropTypes.string,
-      onChange: PropTypes.func.isRequired,
-      onUpdate: PropTypes.func,
-      type: PropTypes.string.isRequired,
-      value: PropTypes.any.isRequired
-    }
+  static propTypes = {
+    customError: PropTypes.any,
+    description: PropTypes.object,
+    id: PropTypes.string.isRequired,
+    label: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
+    onUpdate: PropTypes.func,
+    type: PropTypes.string.isRequired,
+    value: PropTypes.any.isRequired
   }
 
   constructor(...args) {
@@ -74,7 +72,6 @@ class Input extends Component {
     // Delete properties to avoid pass in spread operation
     delete props.onChange
     delete props.onUpdate
-    isCheckbox && delete props.value
 
     return (
       <div className="Input">

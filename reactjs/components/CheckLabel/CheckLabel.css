@@ -6,7 +6,6 @@
 .CheckLabel {
   /* Box-model */
   display: flex;
-  justify-content: center;
   align-items: center;
 
   /* Checkbox */
