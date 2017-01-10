@@ -1,5 +1,14 @@
 # Change Log
 
+## [1.4.0] - 2017-01-10
+
+### Added
+- Add snippets for AnguarJS.
+
+### Modified
+- Update react components.
+
+
 ## [1.3.0] - 2016-11-20
 
 ### Updated
