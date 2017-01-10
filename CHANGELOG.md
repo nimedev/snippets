@@ -1,5 +1,11 @@
 # Change Log
 
+## [1.5.0] - 2017-01-10
+
+### Modified
+- Improve reactjs libraries.
+
+
 ## [1.4.0] - 2017-01-10
 
 ### Added
