@@ -1,0 +1,149 @@
+/** nmd-Toast component (nmd-toast in the DOM) */
+
+:root {
+  --nmd-Toast-z-index: 3;
+  --nmd-Toast-font-size: 0.875rem;
+  --nmd-Toast-btn-color: #fff;
+  --nmd-Toast-bottom: -9rem;
+  --nmd-Toast-duration: 0.4s;
+}
+
+/* Root component selector
+   ========================================================================== */
+
+nmd-toast {
+  /* Positioning */
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: var(--nmd-Toast-z-index);
+
+  /* Box-model */
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.875rem 1.5rem;
+  min-height: 3rem;
+
+  /* Tipography */
+  text-align: center;
+
+  /* Visual */
+  background-color: #323232;
+
+  /* Misc */
+  animation: openToast var(--nmd-Toast-duration) ease-in;
+  transition: bottom var(--nmd-Toast-duration) ease-out;
+
+  /* Responsive */
+  @media screen and (min-width: 37.5rem) {
+    /* Positioning */
+    right: auto;
+    left: 50%;
+
+    /* Box-model */
+    min-width: 18rem;
+    max-width: 35.5rem;
+
+    /* Misc */
+    transform: translateX(-50%);
+  }
+
+  /* Animation when close toast */
+  &.is-closed {
+    bottom: var(--nmd-Toast-bottom);
+  }
+}
+
+/* Component inner classes
+   ========================================================================== */
+
+.nmd-Toast-text {
+  /* Box-model */
+  display: inline-block;
+
+  /* Flexbox item */
+  flex: auto;
+
+  /* Tipography */
+  font-size: var(--nmd-Toast-font-size);
+  line-height: 1.45;
+  color: #fff;
+
+  /* Misc */
+  animation: showToastContent var(--nmd-Toast-duration);
+}
+
+.nmd-Toast-btn {
+  /* Box-model */
+  display: inline-block;
+  margin-left: 1.5rem;
+
+  /* Flexbox item */
+  flex: none;
+
+  /* Tipography */
+  color: var(--nmd-Toast-btn-color, #fff);
+  font-size: var(--nmd-Toast-font-size);
+  line-height: 1.45;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  /* Visual */
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+
+  /* Misc */
+  animation: showToastContent var(--nmd-Toast-duration);
+  user-select: none;
+  transition: all 0.5s ease;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
+  &:visited {
+    color: #fff;
+  }
+
+  /** Disabled button */
+  &--disabled,
+  &:disabled {
+    opacity: 0.5;
+    background-color: #fafafa;
+    color: #000;
+    cursor: default;
+  }
+}
+
+/* Toast Animations */
+
+@keyframes openToast {
+  from {
+    bottom: var(--nmd-Toast-bottom);
+  }
+
+  to {
+    bottom: 0;
+  }
+}
+
+@keyframes showToastContent {
+  0% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

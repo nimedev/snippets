@@ -1,0 +1,45 @@
+/** Toolbar component (rmd-toolbar in the DOM) */
+
+@import "../../styles/settings";
+@import "niduscss-lib-mixins";
+
+:root {
+  /* Height of toolbar */
+  --Toolbar-xs-height: 3.5rem;
+  --Toolbar-sm-height: 4rem;
+}
+
+/* Root component selector
+   ========================================================================== */
+
+rmd-toolbar {
+  /* Box-model */
+  display: block;
+}
+
+/* Component inner classes
+   ========================================================================== */
+
+.Toolbar {
+  /* Box-model */
+  display: flex;
+  align-items: center;
+  height: var(--Toolbar-xs-height);
+
+  /* Visual */
+  background-color: var(--App-primary-df);
+
+  /* Bottom shadow */
+  @mixin u-shadowBottom;
+
+  /* Reponsive */
+  @mixin respondTo --small-viewport {
+    /* Box-model */
+    height: var(--Toolbar-sm-height);
+  }
+}
+
+.Toolbar-item {
+  /* Typography */
+  color: #fff;
+}

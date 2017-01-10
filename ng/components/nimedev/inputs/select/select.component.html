@@ -1,0 +1,58 @@
+<div class="Form-group"
+  ng-cloak>
+  <!-- Input group -->
+  <div class="Form-inputGroup">
+    <label class="Form-label"
+      for="{{ $ctrl.id }}"
+      translate="{{ $ctrl.label }}"></label>
+
+    <!-- Use this option if is a simple array with i18n -->
+    <select class="Form-input"
+      id="{{ $ctrl.id }}"
+      name="{{ $ctrl.name }}"
+      ng-class="{ 'is-invalid': $ctrl.showErrors && !$ctrl.isValidInput }"
+      ng-if="$ctrl.optionArray && $ctrl.i18nItem"
+      ng-model="$ctrl.ngModel"
+      ng-disabled="$ctrl.disabled"
+      ng-required="{{ $ctrl.isRequired }}"
+      ng-options="$ctrl.i18nItem + '.' + item | translate for item in $ctrl.optionArray"
+      server-error>
+    </select>
+
+    <!-- Use this option if is a simple array without i18n -->
+    <select class="Form-input"
+      id="{{ $ctrl.id }}"
+      name="{{ $ctrl.name }}"
+      ng-class="{ 'is-invalid': $ctrl.showErrors && !$ctrl.isValidInput }"
+      ng-if="$ctrl.optionArray && !$ctrl.i18nItem"
+      ng-model="$ctrl.ngModel"
+      ng-disabled="$ctrl.disabled"
+      ng-required="{{ $ctrl.isRequired }}"
+      ng-options="item for item in $ctrl.optionArray"
+      server-error>
+    </select>
+
+    <!-- Use this option if is key value object -->
+    <select class="Form-input"
+      id="{{ $ctrl.id }}"
+      name="{{ $ctrl.name }}"
+      ng-class="{ 'is-invalid': $ctrl.showErrors && !$ctrl.isValidInput }"
+      ng-if="$ctrl.optionObject"
+      ng-model="$ctrl.ngModel"
+      ng-disabled="$ctrl.disabled"
+      ng-required="{{ $ctrl.isRequired }}"
+      ng-options="key as item[$ctrl.itemKey] for (key, item) in $ctrl.optionObject"
+      server-error>
+    </select>
+  </div>
+
+  <!-- Error message section -->
+  <div class="Form-errorMsg"
+    ng-if="$ctrl.showErrors"
+    ng-messages="$ctrl.formError">
+    <div ng-message="server"
+      translate="{{ $ctrl.serverError }}"></div>
+    <div ng-message="required"
+      translate="{{ $ctrl.requiredError }}"></div>
+  </div>
+</div>

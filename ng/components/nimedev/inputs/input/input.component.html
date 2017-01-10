@@ -1,0 +1,35 @@
+<div class="Form-group"
+  ng-cloak>
+  <!-- Input group -->
+  <div class="Form-inputGroup">
+    <label class="Form-label"
+      for="{{ $ctrl.id }}"
+      translate="{{ $ctrl.label }}"></label>
+
+    <input class="Form-input"
+      id="{{ $ctrl.id }}"
+      name="{{ $ctrl.name }}"
+      type="{{ $ctrl.type }}"
+      ng-class="{ 'is-invalid': $ctrl.showErrors && !$ctrl.isValidInput }"
+      ng-model="$ctrl.ngModel"
+      ng-disabled="$ctrl.disabled"
+      ng-required="{{ $ctrl.isRequired }}"
+      ng-maxlength="{{ $ctrl.maxlength }}"
+      ng-min="{{ $ctrl.min }}"
+      server-error>
+  </div>
+
+  <!-- Error message section -->
+  <div class="Form-errorMsg"
+    ng-if="$ctrl.showErrors"
+    ng-messages="$ctrl.formError">
+    <div ng-message="server"
+      translate="{{ $ctrl.serverError }}"></div>
+    <div ng-message="required"
+      translate="{{ $ctrl.requiredError }}"></div>
+    <div ng-message="maxlength"
+      translate="{{ $ctrl.maxlengthError }}"></div>
+    <div ng-message="min"
+      translate="{{ $ctrl.minError }}"></div>
+  </div>
+</div>

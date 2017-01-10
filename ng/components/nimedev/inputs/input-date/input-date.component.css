@@ -1,0 +1,53 @@
+/** InputDate component (nmd-input-date in the DOM) */
+
+/* Component inner classes
+   ========================================================================== */
+
+/* Input container */
+
+.InputDate-input {
+  /* Box-model */
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  /* When input is invalid */
+  .is-invalid {
+    /* Visual */
+    border: 0.0625rem solid #f44336;
+  }
+}
+
+.InputDate-month {
+  /* Box-model */
+  width: 48%;
+  max-width: 48%;
+
+  /* Flexbox item */
+  flex: 1 1 48%;
+}
+
+.InputDate-day {
+  /* Box-model */
+  width: 16%;
+  max-width: 16%;
+
+  /* Flexbox item */
+  flex: 1 1 16%;
+}
+
+.InputDate-year {
+  /* Box-model */
+  width: 32%;
+  max-width: 32%;
+
+  /* Flexbox item */
+  flex: 1 1 32%;
+}
+
+.InputDate-month,
+.InputDate-day,
+.InputDate-year {
+  /* Visual */
+  border-radius: 0.25rem;
+}

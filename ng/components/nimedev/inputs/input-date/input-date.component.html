@@ -1,0 +1,53 @@
+<div class="Form-group">
+  <!-- Input group -->
+  <div class="Form-inputGroup">
+    <!-- Label -->
+    <label class="Form-label"
+      for="{{ $ctrl.id }}"
+      translate="{{ $ctrl.label }}"></label>
+
+    <!-- Input -->
+    <div class="InputDate-input Form-input"
+      name="{{ $ctrl.name }}"
+      ng-model="$ctrl.ngModel">
+      <!-- Month selector -->
+      <select class="InputDate-month"
+        id="{{ $ctrl.id + '-month' }}"
+        name="month"
+        ng-class="{ 'is-invalid': $ctrl.showErrors && !$ctrl.isValidInput && !$ctrl.isValidMonth }"
+        ng-model="$ctrl.month"
+        ng-disabled="$ctrl.disabled"
+        ng-options="'SHARED.INPUT_DATE.MONTHS' + '.' + month | translate for month in $ctrl.months">
+      </select>
+
+      <!-- Day selector -->
+      <select class="InputDate-day"
+        id="{{ $ctrl.id + '-day' }}"
+        name="day"
+        ng-class="{ 'is-invalid': $ctrl.showErrors && !$ctrl.isValidInput && !$ctrl.isValidDay }"
+        ng-model="$ctrl.day"
+        ng-disabled="$ctrl.disabled"
+        ng-options="day for day in $ctrl.days">
+      </select>
+
+      <!-- Year input -->
+      <input class="InputDate-year"
+        type="number"
+        id="{{ $ctrl.id + '-year' }}"
+        name="year"
+        ng-class="{ 'is-invalid': $ctrl.showErrors && !$ctrl.isValidInput && !$ctrl.isValidYear }"
+        ng-model="$ctrl.year"
+        ng-disabled="$ctrl.disabled">
+    </div>
+  </div>
+
+  <!-- Error message section -->
+  <div class="Form-errorMsg"
+    ng-if="$ctrl.showErrors"
+    ng-messages="$ctrl.form[$ctrl.name].$error">
+    <div ng-message="server"
+      translate="{{ $ctrl.serverError }}"></div>
+    <div ng-message="invalid-date"
+      translate="{{ $ctrl.invalidError }}"></div>
+  </div>
+</div>

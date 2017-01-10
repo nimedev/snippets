@@ -1,0 +1,14 @@
+<!-- Show sidenav only if is authenticated-->
+<rmd-sidenav class="Flex-item--none"
+  is-visible="$ctrl.sidenavOpen"
+  on-toggle-sidenav="$ctrl.toggleSidenav()"></rmd-sidenav>
+
+<!-- App content -->
+<div class="AppLayout-content Flex-item--auto">
+  <rmd-toolbar class="Flex-item--none"
+    on-toggle-sidenav="$ctrl.toggleSidenav()"></rmd-toolbar>
+
+  <!-- Only show the main section when route not need authentication or user is logged -->
+  <main class="AppLayout-main Flex-item--auto">
+  </main>
+</div>

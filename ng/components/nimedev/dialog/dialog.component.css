@@ -1,0 +1,115 @@
+/** nmd-Dialog component (nmd-dialog in the DOM) */
+
+:root {
+  --nmd-Dialog-z-index: 3;
+}
+
+/* Root component selector
+   ========================================================================== */
+
+nmd-dialog {
+  /* Positioning */
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: var(--nmd-Dialog-z-index);
+
+  /* Box-model */
+  height: 100%;
+}
+
+/* Component inner classes
+   ========================================================================== */
+
+/* Dialog backdrop */
+
+.nmd-Dialog-back {
+  /* Positioning */
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: var(--nmd-Dialog-z-index);
+
+  /* Box-model */
+  height: 120%;
+
+  /* Visual */
+  background-color: rgba(33, 33, 33, 0.48);
+}
+
+/* Close button of dialog */
+
+.nmd-Dialog-closeBtn {
+  /* Positioining */
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+
+  /* Box-model */
+  display: block;
+  box-sizing: content-box;
+  width: 2rem;
+  height: 2rem;
+
+  /* Visual */
+  cursor: pointer;
+  background-color: transparent;
+
+  /* Style for X arms */
+  &::before,
+  &::after {
+    /* Positioning */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    /* Box-model */
+    content: "";
+    display: inline-block;
+    box-sizing: content-box;
+    width: 1.5rem;
+    height: 0.25rem;
+
+    /* Visual */
+    background: #fff;
+  }
+
+  /* Translate and rotate \ arm */
+  &::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  /* Translate and rotate / arm */
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}
+
+/* Style for compenent inserted in dialog */
+
+.nmd-Dialog-component {
+  /* Positioning */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: var(--nmd-Dialog-z-index);
+
+  /* Box-model */
+  overflow: hidden;
+  min-width: 19rem;
+
+  /* Visual */
+  background-color: white;
+  border-radius: 0.25rem;
+
+  /* Misc */
+  transform: translate(-50%, -50%);
+}
+
+/* Block scroll when open dialog box */
+
+body.is-dialogOpen {
+  overflow: hidden;
+}

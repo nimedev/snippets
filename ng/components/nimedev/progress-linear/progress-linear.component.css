@@ -1,0 +1,129 @@
+/**
+ * nmd-ProgressLinear component (nmd-progress-linear)
+ *
+ * To change progress background color:
+   <nmd-progress-linear class="u-accentBackground-h1" nmd-mode="indeterminate">
+   </nmd-progress-linear>
+ *
+ * To change progress color:
+   <nmd-progress-linear nmd-mode="indeterminate"
+     progress-color="u-accentBackground-h3">
+   </nmd-progress-linear>
+ */
+
+:root {
+  --nmd-ProgressLinear-background: #bbdefb;
+  --nmd-ProgressLinear-progress-color: #2196f3;
+}
+
+/**
+ * Mixins
+ */
+
+/* Common styles for indeterminate progress content */
+
+@define-mixin progressLinearIndeterminate {
+  /* Positioning */
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  /* Box-model */
+  content: "";
+
+  /* Visual */
+  background-color: inherit;
+}
+
+/* Root component selector
+   ========================================================================== */
+
+nmd-progress-linear {
+  /* Positioining */
+  position: relative;
+
+  /* Box-model */
+  display: block;
+  overflow: hidden;
+  margin: 0.5rem 0 1rem 0;
+  width: 100%;
+  height: 0.25rem;
+
+  /* Visual */
+  background-color: var(--nmd-ProgressLinear-background);
+  background-clip: padding-box;
+
+  /* Intederminate progress */
+  &[nmd-mode="indeterminate"] > div {
+    /* Large indeterminate bar */
+    &::before {
+      @mixin progressLinearIndeterminate;
+
+      /* Misc */
+      will-change: left, right;
+      animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+    }
+
+    /* Short indeterminate bar */
+    &::after {
+      @mixin progressLinearIndeterminate;
+
+      /* Misc */
+      will-change: left, right;
+      animation: indeterminateShort 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+      animation-delay: 1.15s;
+    }
+  }
+}
+
+/* Component inner classes
+   ========================================================================== */
+
+/* Style for progress content. Put out component to easy change color */
+
+.nmd-ProgressLinear-content {
+  background-color: var(--nmd-ProgressLinear-progress-color);
+}
+
+/**
+ * Animate large content of progress bar
+ */
+
+@keyframes indeterminate {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+
+/**
+ * Animate short content of progress bar
+ */
+
+@keyframes indeterminateShort {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}

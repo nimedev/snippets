@@ -1,0 +1,24 @@
+<aside class="Sidenav"
+  ng-class="{ 'is-visible': $ctrl.isVisible }">
+  <div class="Sidenav-back"
+    ng-click="$ctrl.onToggleSidenav()"></div>
+
+  <div class="Sidenav-wrapper">
+    <div class="Sidenav-header">
+      <a class="Sidenav-logo"
+        title="ResultsMD"
+        href="/"
+        ng-click="$ctrl.onToggleSidenav()">
+        <img src="/assets/img/logo.png"
+          alt="ResultsMD logo">
+      </a>
+    </div>
+
+    <div class="Divider"></div>
+
+    <div class="Sidenav-content">
+      <nav class="Sidenav-nav">
+      </nav>
+    </div>
+  </div>
+</aside>
