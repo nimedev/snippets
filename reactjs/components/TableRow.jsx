@@ -2,21 +2,23 @@
  * @module TableRow
  */
 
-// Dependencies
 import React, { PropTypes } from 'react'
+import shortid from 'shortid'
 
-const TableRow = ({ items, thead = false, ...props }) => (
+const TableRow = ({ items, thead, ...props }) => (
   <tr {...props}>
-    {items.map((item, index) => {
+    {items.map((item) => {
       let content = item
-      let props = {}
+      let itemProps = {}
       if (typeof item === 'object') {
         content = item.content
-        props = item.props
+        itemProps = item.props
       }
       return thead === 'th'
-        ? <th key={index} {...props}>{content}</th>
-        : <td key={index} {...props}>{content}</td>
+        ? <th key={shortid.generate()}
+          {...itemProps}>{content}</th>
+        : <td key={shortid.generate()}
+          {...itemProps}>{content}</td>
     })}
   </tr>
 )
@@ -25,6 +27,11 @@ TableRow.propTypes = {
   className: PropTypes.string,
   items: PropTypes.array.isRequired,
   thead: PropTypes.string
+}
+
+TableRow.defaultProps = {
+  className: '',
+  thead: ''
 }
 
 /**

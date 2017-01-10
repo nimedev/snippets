@@ -28,6 +28,12 @@ CheckLabel.propTypes = {
   checkLabelRef: PropTypes.func
 }
 
+CheckLabel.defaultProps = {
+  children: null,
+  className: '',
+  checkLabelRef: null
+}
+
 /**
  * CheckLabel component
  */

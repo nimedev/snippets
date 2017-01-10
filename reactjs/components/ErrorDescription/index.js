@@ -1,2 +1,1 @@
-import ErrorDescription from './ErrorDescription'
-export default ErrorDescription
+export { default } from './ErrorDescription'

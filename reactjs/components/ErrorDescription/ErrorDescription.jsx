@@ -5,30 +5,36 @@
 import React, { PropTypes } from 'react'
 import './ErrorDescription.css'
 
-const showError = (validity, description, errorName) => {
-  return validity[errorName] && description[errorName]
-}
+const showError = (validity, descriptions, errorName) => (
+  validity[errorName] && descriptions[errorName]
+)
 
-const ErrorDescription = ({ description, showDescription, validity }) => (
+const ErrorDescription = ({ customErrorMsg, descriptions, showDescription, validity }) => (
   <div className="ErrorDescription">
     {/* Show validation error according with validity object */}
     {showDescription && (
-      showError(validity, description, 'patternMismatch') && <div>{description.patternMismatch}</div>
-      || showError(validity, description, 'rangeOverflow') && <div>{description.rangeOverflow}</div>
-      || showError(validity, description, 'rangeUnderflow') && <div>{description.rangeUnderflow}</div>
-      || showError(validity, description, 'stepMismatch') && <div>{description.stepMismatch}</div>
-      || showError(validity, description, 'tooLong') && <div>{description.tooLong}</div>
-      || showError(validity, description, 'typeMismatch') && <div>{description.typeMismatch}</div>
-      || showError(validity, description, 'valueMissing') && <div>{description.valueMissing}</div>
+      (showError(validity, descriptions, 'patternMismatch') && <div>{descriptions.patternMismatch}</div>)
+      || (showError(validity, descriptions, 'rangeOverflow') && <div>{descriptions.rangeOverflow}</div>)
+      || (showError(validity, descriptions, 'rangeUnderflow') && <div>{descriptions.rangeUnderflow}</div>)
+      || (showError(validity, descriptions, 'stepMismatch') && <div>{descriptions.stepMismatch}</div>)
+      || (showError(validity, descriptions, 'tooLong') && <div>{descriptions.tooLong}</div>)
+      || (showError(validity, descriptions, 'typeMismatch') && <div>{descriptions.typeMismatch}</div>)
+      || (showError(validity, descriptions, 'valueMissing') && <div>{descriptions.valueMissing}</div>)
     )}
-    {description.customError && <div>{description.customError}</div>}
+    {(validity.customError && customErrorMsg && <div>{customErrorMsg}</div>)}
   </div>
 )
 
 ErrorDescription.propTypes = {
-  description: PropTypes.object,
+  customErrorMsg: PropTypes.string,
+  descriptions: PropTypes.object,
   showDescription: PropTypes.bool.isRequired,
-  validity: PropTypes.object
+  validity: PropTypes.object.isRequired
+}
+
+ErrorDescription.defaultProps = {
+  customErrorMsg: null,
+  descriptions: null
 }
 
 /**

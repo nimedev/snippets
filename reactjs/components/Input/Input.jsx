@@ -16,14 +16,21 @@ import './Input.css'
 class Input extends Component {
 
   static propTypes = {
-    customError: PropTypes.any,
-    description: PropTypes.object,
+    customErrorMsg: PropTypes.string,
+    descriptions: PropTypes.object,
     id: PropTypes.string.isRequired,
     label: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     onUpdate: PropTypes.func,
     type: PropTypes.string.isRequired,
     value: PropTypes.any.isRequired
+  }
+
+  static defaultProps = {
+    customErrorMsg: null,
+    descriptions: null,
+    label: '',
+    onUpdate: () => { }
   }
 
   constructor(...args) {
@@ -38,9 +45,10 @@ class Input extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { customError, onUpdate } = nextProps
-    const error = customError ? customError.message : ''
-    this.input.setCustomValidity(error)
+    const { customErrorMsg, onUpdate } = nextProps
+    if (nextProps.customErrorMsg !== this.props.customErrorMsg) {
+      this.input.setCustomValidity(customErrorMsg || '')
+    }
     onUpdate && onUpdate(this.input)
   }
 
@@ -55,17 +63,17 @@ class Input extends Component {
    * Set hasChanged state if input change
    */
   handleChange(ev) {
+    this.input.setCustomValidity('')
     this.setState({ hasChanged: true })
     this.props.onChange(ev)
   }
 
   render() {
-    const { customError, description, label, ...props } = this.props
+    const { customErrorMsg, descriptions, label, ...props } = this.props
     const { hasChanged, loseFocus } = this.state
     const validity = this.input ? this.input.validity : {}
     const showDescription = (hasChanged && loseFocus)
-    const validateClass = showDescription || customError
-      ? 'Input--validate' : ''
+    const validateClass = (showDescription || customErrorMsg) ? 'Input--validate' : ''
     const updatedClass = hasChanged ? 'Input--updated' : ''
     const isCheckbox = props.type === 'checkbox'
 
@@ -80,18 +88,19 @@ class Input extends Component {
           && <input className={`Input-input ${validateClass} ${updatedClass}`}
             onBlur={this.handleBlur}
             onChange={ev => this.handleChange(ev)}
-            ref={input => this.input = input}
-            required={!!description.valueMissing}
+            ref={input => (this.input = input)}
+            required={!!descriptions.valueMissing}
             {...props} />}
         {!isCheckbox && <span className="Input-valIcon" />}
         {isCheckbox
           && <CheckLabel checked={props.value}
             onBlur={this.handleBlur}
             onChange={ev => this.handleChange(ev)}
-            checkLabelRef={input => this.input = input}
-            required={!!description.valueMissing}
+            checkLabelRef={input => (this.input = input)}
+            required={!!descriptions.valueMissing}
             {...props}>{label}</CheckLabel>}
-        <ErrorDescription description={description}
+        <ErrorDescription customErrorMsg={customErrorMsg}
+          descriptions={descriptions}
           showDescription={showDescription}
           validity={validity} />
       </div>
